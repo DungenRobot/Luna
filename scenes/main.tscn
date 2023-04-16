@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://bi278mgj4jaiy"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_i6lo6"]
+[ext_resource type="Texture2D" uid="uid://dho4dnul5ihw4" path="res://textures/grass.png" id="1_l44ld"]
+[ext_resource type="PackedScene" uid="uid://d1w6hpjscpvex" path="res://prefabs/player.tscn" id="2_yt01n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbhd0"]
+albedo_texture = ExtResource("1_l44ld")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.25598
+texture_filter = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_cw82g"]
+radius = 15.0
+height = 30.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_phcjw"]
+radius = 15.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f8oyc"]
+radius = 22.9052
+
+[sub_resource type="BoxMesh" id="BoxMesh_g2fjg"]
+size = Vector3(0.444, 2.333, 0.51)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_i6lo6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.491328, -0.54746, 0.67741, -0.0878025, 0.742666, 0.663881, -0.866538, -0.385662, 0.316824, 24.65, 11.3743, 1.90735e-06)
+
+[node name="Planet" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Planet"]
+material_override = SubResource("StandardMaterial3D_gbhd0")
+mesh = SubResource("SphereMesh_cw82g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet"]
+shape = SubResource("SphereShape3D_phcjw")
+
+[node name="Area3D" type="Area3D" parent="Planet"]
+gravity_space_override = 3
+gravity_point = true
+gravity_point_unit_distance = 15.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet/Area3D"]
+shape = SubResource("SphereShape3D_f8oyc")
+
+[node name="Player" parent="." instance=ExtResource("2_yt01n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.9545, 0)
+floor_max_angle = 0.00698132
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("BoxMesh_g2fjg")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.6705, 21.29)
+visible = false
