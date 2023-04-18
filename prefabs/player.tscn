@@ -1,15 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1w6hpjscpvex"]
+[gd_scene load_steps=4 format=3 uid="uid://d1w6hpjscpvex"]
 
 [ext_resource type="Script" path="res://scripts/playerController.gd" id="1_fni12"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_akaqr"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_cr01a"]
+radius = 0.25
+height = 0.5
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_fni12")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0325935, -0.0325935)
 shape = SubResource("CapsuleShape3D_akaqr")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70004, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0325935, 0.667446)
 current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0325936, -0.634853)
+mesh = SubResource("SphereMesh_cr01a")

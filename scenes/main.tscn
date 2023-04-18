@@ -1,34 +1,50 @@
-[gd_scene load_steps=9 format=3 uid="uid://bi278mgj4jaiy"]
+[gd_scene load_steps=13 format=3 uid="uid://bi278mgj4jaiy"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_i6lo6"]
 [ext_resource type="Texture2D" uid="uid://dho4dnul5ihw4" path="res://textures/grass.png" id="1_l44ld"]
 [ext_resource type="PackedScene" uid="uid://d1w6hpjscpvex" path="res://prefabs/player.tscn" id="2_yt01n"]
+[ext_resource type="Texture2D" uid="uid://ceirurcp13cx4" path="res://textures/lroc_color_poles_2k.png" id="4_cxbam"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbhd0"]
 albedo_texture = ExtResource("1_l44ld")
+metallic_specular = 0.0
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_triplanar_sharpness = 1.25598
 texture_filter = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_cw82g"]
-radius = 15.0
-height = 30.0
+radius = 50.0
+height = 100.0
+radial_segments = 32
+rings = 16
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_phcjw"]
-radius = 15.0
+radius = 50.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f8oyc"]
-radius = 22.9052
+radius = 55.0989
 
-[sub_resource type="BoxMesh" id="BoxMesh_g2fjg"]
-size = Vector3(0.444, 2.333, 0.51)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_umu5s"]
+albedo_texture = ExtResource("4_cxbam")
+
+[sub_resource type="SphereMesh" id="SphereMesh_6ee4p"]
+radius = 25.0
+height = 50.0
+radial_segments = 8
+rings = 4
+
+[sub_resource type="PrismMesh" id="PrismMesh_teh41"]
+size = Vector3(0.906, 0.962, 0.14)
+
+[sub_resource type="Environment" id="Environment_mnk8o"]
+background_mode = 1
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_i6lo6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.491328, -0.54746, 0.67741, -0.0878025, 0.742666, 0.663881, -0.866538, -0.385662, 0.316824, 24.65, 11.3743, 1.90735e-06)
+transform = Transform3D(0.340411, 0.0135226, 0.94018, -0.368401, 0.921873, 0.120127, -0.865102, -0.387255, 0.318797, 24.65, 11.3743, 1.90735e-06)
 
 [node name="Planet" type="StaticBody3D" parent="."]
 
@@ -47,13 +63,20 @@ gravity_point_unit_distance = 15.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Planet/Area3D"]
 shape = SubResource("SphereShape3D_f8oyc")
 
-[node name="Player" parent="." instance=ExtResource("2_yt01n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.9545, 0)
-floor_max_angle = 0.00698132
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-mesh = SubResource("BoxMesh_g2fjg")
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.6705, 21.29)
-visible = false
+transform = Transform3D(0.728777, 0, 0.684751, 0, 1, 0, -0.684751, 0, 0.728777, 25.2119, 1.90735e-06, 70.9889)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.867863, 0.1801, 0.463011, 0.175253, 0.983047, -0.0538898, -0.464868, 0.0343749, -0.884713, 229.202, -49.1616, -291.352)
+material_override = SubResource("StandardMaterial3D_umu5s")
+mesh = SubResource("SphereMesh_6ee4p")
+
+[node name="Player" parent="." instance=ExtResource("2_yt01n")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 13.673, 8.9556, 49.8118)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0)
+mesh = SubResource("PrismMesh_teh41")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mnk8o")
