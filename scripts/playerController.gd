@@ -27,22 +27,38 @@ func _process(delta):
 	
 	#print(up_direction)
 	
-	var look_point = vec_to_point.rotated(Vector3.BACK, -PI/2)
+	transform = transform.orthonormalized()
+	if transform.basis.y.normalized().cross(-vec_to_point) != Vector3():
+		look_at(vec_to_point, transform.basis.y)
+	elif transform.basis.x.normalized().cross(-vec_to_point) != Vector3():
+		look_at(vec_to_point, transform.basis.x)
 	
-	look_at(look_point)
+	#var look_point = vec_to_point.rotated(Vector3.BACK, -PI/2)
+	
+	#look_at(look_point)
 	#rotation = vec_to_point 
 	
 	look_input *= LOOK_SPEED
 	
-	$Camera3D.rotation_degrees.x += look_input.y
-	$Camera3D.rotation_degrees.y += look_input.x
-	$Camera3D.rotation_degrees.x = clampf($Camera3D.rotation_degrees.x, 0, 180)
+	#$Pivot/Camera3D.rotate_object_local($Pivot/Camera3D.transform.basis.x, deg_to_rad(look_input.y))
+	$Pivot/Camera3D.rotation_degrees.x += look_input.y
+	$Pivot/Camera3D.rotation_degrees.x = clampf($Pivot/Camera3D.rotation_degrees.x, 0, 180)
+	$Pivot.rotation_degrees.z += look_input.x
+	#$Pivot.rotate_object_local($Pivot.transform.basis.z, deg_to_rad(look_input.x))
+	#$Camera3D.rotate_object_local($Camera3D.transform.basis.z, -deg_to_rad(look_input.x))
+	#$Camera3D.rotation_degrees.x = clampf($Camera3D.rotation_degrees.x, 0, 180)
 
 	look_input = Vector2.ZERO
 
 func _physics_process(delta):
 	
+	velocity = $Pivot.global_transform.basis.y * (Input.get_action_strength("Forward") - Input.get_action_strength("Back"))
+	velocity += $Pivot.global_transform.basis.x * (Input.get_action_strength("Right") - Input.get_action_strength("Left"))
+	
+	velocity *= DEFAULT_SPEED
+	
 	var vec_to_point = (global_position - point_gravity).normalized()
+	
 	
 	
 	if is_on_floor():
