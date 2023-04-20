@@ -1,9 +1,28 @@
-[gd_scene load_steps=13 format=3 uid="uid://bi278mgj4jaiy"]
+[gd_scene load_steps=17 format=3 uid="uid://bi278mgj4jaiy"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_i6lo6"]
 [ext_resource type="Texture2D" uid="uid://dho4dnul5ihw4" path="res://textures/grass.png" id="1_l44ld"]
 [ext_resource type="PackedScene" uid="uid://d1w6hpjscpvex" path="res://prefabs/player.tscn" id="2_yt01n"]
 [ext_resource type="Texture2D" uid="uid://ceirurcp13cx4" path="res://textures/lroc_color_poles_2k.png" id="4_cxbam"]
+[ext_resource type="Theme" uid="uid://dtcttwjogd027" path="res://main_menu.tres" id="5_j11hx"]
+[ext_resource type="FontFile" uid="uid://db3x6piut7wm7" path="res://fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf" id="5_vukah"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_umu5s"]
+transparency = 1
+albedo_texture = ExtResource("4_cxbam")
+
+[sub_resource type="SphereMesh" id="SphereMesh_6ee4p"]
+radius = 10.0
+height = 20.0
+radial_segments = 32
+rings = 64
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jf5pm"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4d3nu"]
+radius = 1.0
+height = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbhd0"]
 albedo_texture = ExtResource("1_l44ld")
@@ -14,29 +33,21 @@ uv1_triplanar_sharpness = 1.25598
 texture_filter = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_cw82g"]
-radius = 50.0
-height = 100.0
+radius = 25.0
+height = 50.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_phcjw"]
-radius = 50.0
+radius = 25.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f8oyc"]
 radius = 55.0989
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_umu5s"]
-albedo_texture = ExtResource("4_cxbam")
-
-[sub_resource type="SphereMesh" id="SphereMesh_6ee4p"]
-radius = 15.0
-height = 30.0
-radial_segments = 32
-rings = 64
 
 [sub_resource type="PrismMesh" id="PrismMesh_teh41"]
 size = Vector3(0.906, 0.962, 0.14)
 
 [sub_resource type="Environment" id="Environment_mnk8o"]
 background_mode = 1
+ambient_light_source = 1
 ambient_light_energy = 0.07
 fog_light_color = Color(0.53, 0.81, 0.92, 1)
 fog_density = 0.03
@@ -50,9 +61,22 @@ visible = false
 light_color = Color(0.168627, 0.423529, 0.839216, 1)
 light_cull_mask = 4293918724
 
+[node name="Moon" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.203653, -0.176511, -0.963001, 0.150193, 0.966338, -0.208885, 0.967456, -0.187176, -0.170287, -134.384, -28.817, 42.4126)
+layers = 2
+material_override = SubResource("StandardMaterial3D_umu5s")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_6ee4p")
+
 [node name="SunLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.340411, 0.0135228, 0.94018, -0.368401, 0.921873, 0.120127, -0.865102, -0.387256, 0.318798, 24.65, 11.3743, 1.90735e-06)
+transform = Transform3D(-0.99961, -0.0166083, -0.0224451, 1.40551e-07, 0.803857, -0.594823, 0.0279217, -0.594591, -0.803544, 24.65, 11.3743, 1.90735e-06)
+light_angular_distance = 35.41
 sky_mode = 1
+
+[node name="Sun" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -51.2519)
+material_override = SubResource("StandardMaterial3D_jf5pm")
+mesh = SubResource("SphereMesh_4d3nu")
 
 [node name="Planet" type="StaticBody3D" parent="."]
 
@@ -72,16 +96,16 @@ gravity_point_unit_distance = 15.0
 shape = SubResource("SphereShape3D_f8oyc")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.728777, 0, 0.684751, 0, 1, 0, -0.684751, 0, 0.728777, 25.2119, 1.90735e-06, 70.9889)
-
-[node name="Moon" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.501223, 0.276313, -0.820017, 0.436182, 0.899124, 0.036361, 0.747345, -0.339451, -0.571184, -182.395, -33.3393, -283.6)
-layers = 2
-material_override = SubResource("StandardMaterial3D_umu5s")
-mesh = SubResource("SphereMesh_6ee4p")
+transform = Transform3D(0.728777, 0, 0.684751, 0, 1, 0, -0.684751, 0, 0.728777, -13.8534, -24.9851, -69.9145)
 
 [node name="Player" parent="." instance=ExtResource("2_yt01n")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 13.673, 8.9556, 49.8118)
+transform = Transform3D(0.200898, -0.72316, -0.660818, 0.956763, -1.27143e-08, 0.290869, -0.210345, -0.690681, 0.691893, -21.5319, 8.9556, 11.513)
+
+[node name="Pivot" parent="Player" index="2"]
+transform = Transform3D(0.599024, -0.800731, 0, 0.800731, 0.599024, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Camera3D" parent="Player/Pivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.762668, -0.64679, 0, 0.64679, -0.762668, 0, 0.0325935, 0.667446)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -90,3 +114,91 @@ mesh = SubResource("PrismMesh_teh41")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mnk8o")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Main Menu" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_j11hx")
+
+[node name="Sidebar" type="Control" parent="UI/Main Menu"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -410.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/Main Menu/Sidebar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.224
+anchor_right = 1.0
+anchor_bottom = 0.224
+offset_left = -353.0
+offset_top = -112.152
+offset_right = -86.0
+offset_bottom = 3.84799
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("5_vukah")
+theme_override_font_sizes/font_size = 100
+text = "Luna"
+
+[node name="Buttons" type="VBoxContainer" parent="UI/Main Menu/Sidebar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.242
+anchor_right = 1.022
+anchor_bottom = 1.0
+offset_top = 39.184
+offset_right = -38.02
+offset_bottom = -97.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PlayButton" type="Button" parent="UI/Main Menu/Sidebar/Buttons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="UI/Main Menu/Sidebar/Buttons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="UI/Main Menu/Sidebar/Buttons"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Exit"
+
+[node name="Gameplay" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="button_up" from="UI/Main Menu/Sidebar/Buttons/PlayButton" to="." method="_on_play_button_button_up"]
+[connection signal="button_up" from="UI/Main Menu/Sidebar/Buttons/ExitButton" to="." method="_on_exit_button_button_up"]
+
+[editable path="Player"]

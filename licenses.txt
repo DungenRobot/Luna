@@ -1,0 +1,14 @@
+Grass Texture by KIIRA
+https://opengameart.org/content/hand-painted-grass-texture
+
+Moon texture from NASA's CGI Moon kit created by NASA's Scientific Visualization Studio.
+https://svs.gsfc.nasa.gov/cgi-bin/details.cgi?aid=4720
+
+Transform code (orienting player around planet properly) by Pigeonaut
+https://youtu.be/zuEPWtPRsgE
+
+Comfortaa (title font) by Johan Aakerlund
+Full font license available on next page
+
+The use of these assets and materials has not been endorsed by the respective authors
+I have no working relationship with any of the individuals listed above.
