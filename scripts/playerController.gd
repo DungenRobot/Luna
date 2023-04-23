@@ -44,7 +44,7 @@ func _process(delta):
 	
 	#$Pivot/Camera3D.rotate_object_local($Pivot/Camera3D.transform.basis.x, deg_to_rad(look_input.y))
 	$Pivot/Camera3D.rotation_degrees.x += look_input.y
-	$Pivot/Camera3D.rotation_degrees.x = clampf($Pivot/Camera3D.rotation_degrees.x, 0, 180)
+	$Pivot/Camera3D.rotation_degrees.x = clampf($Pivot/Camera3D.rotation_degrees.x, 10, 170)
 	$Pivot.rotation_degrees.z += look_input.x
 	#$Pivot.rotate_object_local($Pivot.transform.basis.z, deg_to_rad(look_input.x))
 	#$Camera3D.rotate_object_local($Camera3D.transform.basis.z, -deg_to_rad(look_input.x))

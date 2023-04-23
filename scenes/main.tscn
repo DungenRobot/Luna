@@ -62,7 +62,7 @@ light_color = Color(0.168627, 0.423529, 0.839216, 1)
 light_cull_mask = 4293918724
 
 [node name="Moon" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.203653, -0.176511, -0.963001, 0.150193, 0.966338, -0.208885, 0.967456, -0.187176, -0.170287, -134.384, -28.817, 42.4126)
+transform = Transform3D(-0.0117405, -0.209524, -0.977734, 0.150193, 0.966338, -0.208885, 0.988589, -0.149301, 0.0201234, -134.384, -28.817, 42.4126)
 layers = 2
 material_override = SubResource("StandardMaterial3D_umu5s")
 cast_shadow = 0
@@ -162,19 +162,20 @@ text = "Luna"
 [node name="Buttons" type="VBoxContainer" parent="UI/Main Menu/Sidebar"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.242
-anchor_right = 1.022
-anchor_bottom = 1.0
-offset_top = 39.184
-offset_right = -38.02
-offset_bottom = -97.0
+anchor_left = 1.0
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 0.6
+offset_left = -410.0
+offset_top = -192.8
+offset_bottom = 192.2
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="PlayButton" type="Button" parent="UI/Main Menu/Sidebar/Buttons"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 4
 text = "Play"
 
 [node name="OptionsButton" type="Button" parent="UI/Main Menu/Sidebar/Buttons"]
@@ -186,7 +187,7 @@ text = "Options"
 [node name="ExitButton" type="Button" parent="UI/Main Menu/Sidebar/Buttons"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 4
 text = "Exit"
 
 [node name="Gameplay" type="Control" parent="UI"]
