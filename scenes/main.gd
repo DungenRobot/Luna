@@ -34,7 +34,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("menu"):
-		get_tree().quit()
+		
+		if $UI/Credits.visible: 
+			$UI/Credits.hide()
+			$UI/Credits/ComfortaLicense.hide()
+			return
+		if $"UI/Main Menu".visible: 
+			get_tree().quit()
+			return
+		
 		if $UI/Gameplay.visible:
 			$UI/Gameplay.hide()
 			$Player.can_move = 1
@@ -136,15 +144,20 @@ func _input(event):
 	
 
 
-
-
-
-
-
-
-
 func _on_return_botton_button_up():
 	$UI/Gameplay.hide()
 
-func _on_options_button_button_up():
-	pass # Replace with function body.
+
+func _on_credits_button_button_down():
+	$UI/Credits.show()
+
+func _on_back_button_down():
+	$UI/Credits/ComfortaLicense.hide()
+
+
+func _on_comforta_button_down():
+	$UI/Credits/ComfortaLicense.show()
+
+
+func _on_backC_button_down():
+	$UI/Credits.hide()
