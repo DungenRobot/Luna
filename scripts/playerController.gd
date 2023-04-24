@@ -9,8 +9,9 @@ var look_input:= Vector2()
 
 var can_move: int = 0
 
-const DEFAULT_SPEED = 5
-const LOOK_SPEED = Vector2(-0.6, -0.3)
+const DEFAULT_SPEED = 3.5
+const LOOK_SPEED = Vector2(-0.2, -0.24)
+const C_SPEED = Vector2(2.5, 1.5)
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -39,8 +40,19 @@ func _process(delta):
 	
 	#look_at(look_point)
 	#rotation = vec_to_point 
+	var c_look = Vector2()
+	c_look.y = Input.get_action_strength("look_up") - Input.get_action_strength("look_down")
+	c_look.x += Input.get_action_strength("look_left") - Input.get_action_strength("look_right")
+
+	c_look *= C_SPEED * can_move
+	
 	
 	look_input *= LOOK_SPEED * can_move
+	
+	if look_input.length() > 0:
+		c_look = Vector2.ZERO
+	
+	look_input += c_look
 	
 	#$Pivot/Camera3D.rotate_object_local($Pivot/Camera3D.transform.basis.x, deg_to_rad(look_input.y))
 	$Pivot/Camera3D.rotation_degrees.x += look_input.y
@@ -59,6 +71,8 @@ func _physics_process(delta):
 	
 	velocity = $Pivot.global_transform.basis.y * (Input.get_action_strength("Forward") - Input.get_action_strength("Back"))
 	velocity += $Pivot.global_transform.basis.x * (Input.get_action_strength("Right") - Input.get_action_strength("Left"))
+	
+	if velocity.length() > 1: velocity = velocity.normalized()
 	
 	velocity *= DEFAULT_SPEED * can_move
 	

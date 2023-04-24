@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dtcttwjogd027"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dtcttwjogd027"]
 
 [ext_resource type="FontFile" uid="uid://db3x6piut7wm7" path="res://fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf" id="1_t3x88"]
 
@@ -11,9 +11,14 @@ corner_detail = 15
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kfi1r"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbqvk"]
+bg_color = Color(1, 1, 1, 0.184314)
+
 [resource]
 default_font = ExtResource("1_t3x88")
 default_font_size = 38
 BoxContainer/constants/separation = 15
 Button/styles/hover = SubResource("StyleBoxFlat_w65wc")
 Button/styles/normal = SubResource("StyleBoxFlat_kfi1r")
+GameplayMenu/base_type = &"Button"
+GameplayMenu/styles/hover = SubResource("StyleBoxFlat_cbqvk")
