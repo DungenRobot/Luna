@@ -3,4 +3,4 @@
 
 exports/*
 !exports/.gitkeep
-.DS_Store
+*.DS_Store
