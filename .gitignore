@@ -4,3 +4,5 @@
 exports/*
 !exports/.gitkeep
 *.DS_Store
+
+export_presets.cfg
